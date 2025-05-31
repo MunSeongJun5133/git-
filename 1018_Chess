@@ -1,0 +1,68 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _1018_Chess
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            String[] str = Console.ReadLine().Split();
+            Int32 n = Int32.Parse(str[0]);
+            Int32 m = Int32.Parse(str[1]);
+
+            Char[,] board = new Char[50, 50];
+
+            for (Int32 i = 0; i < n; i++)
+            {
+                String s = Console.ReadLine();
+                for (Int32 j = 0; j < m; j++)
+                    board[i, j] = s[j];
+            }
+
+            Int32 row;
+            Int32 col;
+            List<Int32> list = new List<Int32>();
+            for(row = 0; row <= n - 8; row++)
+            {
+                for(col = 0; col <= m - 8; col++)
+                {
+                    Int32 wStart = 0;
+                    Int32 bStart = 0;
+                    for (Int32 i = 0; i < 8; i++)
+                    {
+                        for(Int32 j = 0; j < 8; j++)
+                        {
+                            if ((row + i + col + j) % 2 == 0)
+                            {
+                                if (board[row + i, col + j] != 'W')
+                                    wStart++;
+                                if (board[row + i, col + j] != 'B')
+                                    bStart++;
+                            }
+                            else if((row + i + col + j)  % 2 == 1)
+                            {
+                                if (board[row + i, col + j] != 'B')
+                                    wStart++;
+                                if (board[row + i, col + j] != 'W')
+                                    bStart++;
+                            }
+                        }
+                    }
+                    list.Add(wStart);
+                    list.Add(bStart);
+                }
+            }
+            Int32 min = list[0];
+
+            for(Int32 i = 0; i < list.Count; i++)
+                if(min > list[i])
+                    min = list[i];
+
+            Console.WriteLine(min);
+        }
+    }
+}
