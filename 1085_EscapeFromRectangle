@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _1085_escapeFromrectangle
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            String[] str = Console.ReadLine().Split();
+            Int32 x = Int32.Parse(str[0]);
+            Int32 y = Int32.Parse(str[1]);
+            Int32 w = Int32.Parse(str[2]);
+            Int32 h = Int32.Parse(str[3]);
+            Int32[] arr = new Int32[4];
+            arr[0] = x - 0;
+            arr[1] = y - 0;
+            arr[2] = w - x;
+            arr[3] = h - y;
+            Int32 min = arr[0];
+            for(Int32 i = 0; i < arr.Length; i++)
+            {
+                if (min > arr[i])
+                    min = arr[i];
+            }
+            Console.WriteLine(min);
+        }
+    }
+}
